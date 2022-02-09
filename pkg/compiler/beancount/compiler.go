@@ -79,6 +79,10 @@ func (b *BeanCount) Compile() error {
 		b.IR.Orders[index].MinusAccount = minusAccount
 		b.IR.Orders[index].PlusAccount = plusAccount
 		b.IR.Orders[index].ExtraAccounts = extraAccounts
+		if !b.IR.Orders[index].Pending && b.Config.NeedConfirmed {
+			// 如果minusAccount或plusAccount为默认账户，则订单Pending为True
+			b.IR.Orders[index].Pending = minusAccount == b.Config.DefaultMinusAccount || plusAccount == b.Config.DefaultPlusAccount
+		}
 	}
 
 	log.Printf("Writing to %s", b.Output)
