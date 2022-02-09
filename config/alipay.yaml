@@ -1,0 +1,128 @@
+defaultMinusAccount: Assets:FIXME
+defaultPlusAccount: Expenses:FIXME
+defaultCurrency: CNY
+needConfirmed: true
+title: 支付宝2021年度账单
+alipay:
+  rules:
+    - category: 日用百货
+      targetAccount: Expenses:Groceries
+    - category: 交通出行
+      targetAccount: Expenses:Transportation
+    - category: 爱车养车
+      targetAccount: Expenses:Car
+    - category: 充值缴费
+      targetAccount: Expenses:Telecome
+    - category: 生活服务
+      targetAccount: Expenses:Services
+    - category: 服饰装扮
+      targetAccount: Expenses:Clothing
+    - category: 文化休闲
+      targetAccount: Expenses:Entertainment
+    - category: 家居家装
+      targetAccount: Expenses:Home
+    - category: 医疗健康
+      targetAccount: Expenses:Health
+    - category: 酒店旅游
+      targetAccount: Expenses:Hotel
+    - category: 公益捐赠
+      targetAccount: Expenses:Donation
+    - category: 数码电器
+      targetAccount: Expenses:Electronics
+    - category: 餐饮美食
+      time: 11:00-14:00
+      targetAccount: Expenses:Food:Lunch
+    - category: 餐饮美食
+      time: 17:00-22:00
+      targetAccount: Expenses:Food:Dinner
+    - category: 餐饮美食
+      targetAccount: Expenses:Food
+
+    - peer: 红旗连锁
+      targetAccount: Expenses:Food
+    - peer: 途虎养车
+      targetAccount: Expenses:Car
+
+    - item: 相互宝
+      targetAccount: Expenses:Insurance
+
+    - item: 还款-花呗
+      targetAccount: Liabilities:Huabei
+    - item: 余额宝-自动转入,支付宝转入到余利宝
+      targetAccount: Assets:Alipay
+    - method: 花呗
+      methodAccount: Liabilities:Huabei
+
+    - method: 余额
+      fullMatch: true
+      methodAccount: Assets:Alipay
+
+    - method: 余额宝
+      methodAccount: Assets:Alipay
+
+    - method: 招商银行
+      methodAccount: Assets:Bank:CN:CMB:Savings
+
+    - peer: 网商银行
+      category: 其他
+      targetAccount: Assets:Bank:CN:CMB:Savings
+      methodAccount: Assets:Alipay
+
+    - peer: 张帅
+      item: 银行卡
+      type: 其他
+      category: 转账红包
+      targetAccount: Assets:Bank:CN:CMB:Savings
+
+    - peer: 张帅
+      item: 余额宝-转出到余额
+      type: 其他
+      targetAccount: Assets:Alipay
+    - peer: 正英(孙正英)
+      item: 转账
+      fullMatch: true
+      targetAccount: Equity:House:Jiatong
+    - peer: 正英(孙正英)
+      item: 买车位
+      fullMatch: true
+      targetAccount: Equity:Carport
+    - peer: 钉钉红包
+      targetAccount: Income:Other
+      methodAccount: Assets:Alipay
+    - item: 现金奖励,添福红包
+      type: 收入
+      targetAccount: Income:Other
+      methodAccount: Assets:Alipay
+
+
+    # 待修改
+#    - type: 收入 # 其他转账收款
+#      targetAccount: Income:Other
+#      methodAccount: Assets:Alipay
+    - type: 收入 # 收款码收款
+      item: 商品
+      targetAccount: Income:Alipay:ShouKuanMa
+      methodAccount: Assets:Alipay
+
+    # 交易类型为其他
+    - type: 其他
+      item: 收益发放
+      methodAccount: Income:Alipay:YuEBao:PnL
+      targetAccount: Assets:Alipay
+
+    - peer: 基金
+      type: 其他
+      item: 买入
+      methodAccount: Assets:Alipay
+      targetAccount: Assets:Alipay:Invest:Fund
+    - peer: 基金
+      type: 其他
+      item: 卖出,转出
+      methodAccount: Assets:Alipay:Invest:Fund
+      targetAccount: Assets:Alipay
+      pnlAccount: Income:Alipay:Invest:PnL
+
+    - type: 其他
+      item: 余额宝-单次转入
+      targetAccount: Assets:Alipay
+      methodAccount: Assets:Alipay
